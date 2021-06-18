@@ -8,7 +8,6 @@ master = Tk()
 master.geometry("600x500")
 master.config(bg="#111")
 
-
 canvas = Canvas(master, width=300, height=100)
 canvas.place(x=150, y=10)
 img = PhotoImage(file="img_1.png")
@@ -61,12 +60,11 @@ def sub():
         messagebox.showinfo("Error", "Return in" + '\n' + str(years_left) + "years time")
 
     try:
-        # Validate.
         validate_email(email_ent.get())
-        # Update with the normalized form.
+
     except EmailNotValidError:
         # email is not valid
-        messagebox.showinfo("Invalid ID number. Try again")
+        messagebox.showinfo("Invalid Email. Try again")
     master.destroy()
     import Random_window
 

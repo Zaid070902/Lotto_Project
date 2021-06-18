@@ -9,12 +9,14 @@ root.resizable(0, 0)
 x = StringVar()
 y = StringVar()
 z = StringVar()
+a = StringVar()
+b = StringVar()
+c = StringVar()
 
 canvas = Canvas(root, width=350, height=100, bg="white")
 canvas.place(x=150, y=30)
 img = PhotoImage(file="img_1.png")
 canvas.create_image(0, 0, anchor=NW, image=img)
-
 
 # self.user_num = Entry(root, width=5,).place(x=150, y=200)
 # self.user_num = Entry(root, width=5, ).place(x=200, y=200)
@@ -22,17 +24,19 @@ canvas.create_image(0, 0, anchor=NW, image=img)
 # self.user_num = Entry(root, width=5, ).place(x=300, y=200)
 # self.user_num = Entry(root, width=5, ).place(x=350, y=200)
 # self.user_num = Entry(root, width=5, ).place(x=400, y=200)
-users_numbers = Label(root, width=17, bg="gold", textvariable=x).place(x=250, y=550)
-users_numbers2 = Label(root, width=17, bg="gold", textvariable=y).place(x=250, y=580)
-users_numbers3 = Label(root, width=17, bg="gold", textvariable=z).place(x=250, y=610)
+users_numbers = Label(root, width=17, bg="gold", textvariable=x).place(x=150, y=550)
+users_numbers2 = Label(root, width=17, bg="gold", textvariable=y).place(x=150, y=580)
+users_numbers3 = Label(root, width=17, bg="gold", textvariable=z).place(x=150, y=610)
 
 Lotto_list = random.sample(range(1, 49), 6)
 print(Lotto_list)
 
-
 listx = []
 listy = []
 listz = []
+match_list = []
+match_list2 = []
+match_list3 = []
 
 
 def click(num):
@@ -49,6 +53,79 @@ def click(num):
         z.set(listz)
 
 
+def compare():
+    for num in Lotto_list:
+        if num in listx:
+            match_list.append(num)
+            print(match_list)
+
+    for num in Lotto_list:
+        if num in listy:
+            match_list2.append(num)
+            print(match_list2)
+
+    for num in Lotto_list:
+        if num in listz:
+            match_list3.append(num)
+            print(match_list3)
+
+    a.set("you matched " + str(len(match_list)) + " numbers")
+    b.set("you matched " + str(len(match_list2)) + " numbers")
+    c.set("you matched " + str(len(match_list3)) + " numbers")
+
+
+match_lab1 = Label(root, bg="#111", fg="gold", textvariable=a).place(x=300, y=550)
+match_lab2 = Label(root, bg="#111", fg="gold", textvariable=b).place(x=300, y=580)
+match_lab3 = Label(root, bg="#111", fg="gold", textvariable=c).place(x=300, y=610)
+heading = Label(root, bg="#111", text="Select 6 Lucky numbers!", fg="gold", font=20).place(x=250, y=150)
+
+prizes = [0, 20, 100.50, 2384, 8584, 10000000]
+
+
+def winnings():
+    if len(match_list) < 2:
+        a.set("You won R" + str(prizes[0]))
+    elif len(match_list) == 2:
+        a.set("You won R" + str(prizes[1]))
+    elif len(match_list) == 3:
+        a.set("You won R" + str(prizes[2]))
+    elif len(match_list) == 4:
+        a.set("You won R" + str(prizes[3]))
+    elif len(match_list) == 5:
+        a.set("You won R" + str(prizes[4]))
+    elif len(match_list) == 6:
+        a.set("You won R" + str(prizes[5]))
+
+    if len(match_list2) < 2:
+        b.set("You won R" + str(prizes[0]))
+    elif len(match_list2) == 2:
+        b.set("You won R" + str(prizes[1]))
+    elif len(match_list2) == 3:
+        b.set("You won R" + str(prizes[2]))
+    elif len(match_list2) == 4:
+        b.set("You won R" + str(prizes[3]))
+    elif len(match_list2) == 5:
+        b.set("You won R" + str(prizes[4]))
+    elif len(match_list2) == 6:
+        b.set("You won R" + str(prizes[5]))
+
+    if len(match_list3) < 2:
+        c.set("You won R" + str(prizes[0]))
+    elif len(match_list3) == 2:
+        c.set("You won R" + str(prizes[1]))
+    elif len(match_list3) == 3:
+        c.set("You won R" + str(prizes[2]))
+    elif len(match_list3) == 4:
+        c.set("You won R" + str(prizes[3]))
+    elif len(match_list3) == 5:
+        c.set("You won R" + str(prizes[4]))
+    elif len(match_list3) == 6:
+        c.set("You won R" + str(prizes[5]))
+
+
+total_wins_btn = Button(root, text="total").place(x=400, y=650)
+winnings_btn = Button(root, text="Winnings", command=winnings).place(x=300, y=650)
+play_btn = Button(root, text="Play", bg="gold", command=compare, width=14).place(x=150, y=650)
 num_select1 = Button(root, width=2, bg="gold", text="1", command=lambda: click(1)).place(x=150, y=200)
 num_select2 = Button(root, width=2, bg="gold", text="2", command=lambda: click(2)).place(x=200, y=200)
 num_select3 = Button(root, width=2, bg="gold", text="3", command=lambda: click(3)).place(x=250, y=200)
@@ -98,6 +175,5 @@ num_select47 = Button(root, width=2, bg="gold", text="46", command=lambda: click
 num_select48 = Button(root, width=2, bg="gold", text="47", command=lambda: click(47)).place(x=350, y=500)
 num_select49 = Button(root, width=2, bg="gold", text="48", command=lambda: click(48)).place(x=400, y=500)
 num_select50 = Button(root, width=2, bg="gold", text="49", command=lambda: click(49)).place(x=450, y=500)
-
 
 root.mainloop()
