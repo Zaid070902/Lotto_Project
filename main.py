@@ -39,6 +39,7 @@ address_ent.place(x=300, y=300)
 
 
 def sub():
+    # adding contents to a text file
     text = ""
     my_file = open("Text_file.txt", 'a')
     text += "Username: " + name_ent.get()
@@ -51,6 +52,7 @@ def sub():
     text += '\n'
     my_file.write(text)
 
+    # verifying id number and checking age
     id_num = rsaidnumber.parse(id_num_ent.get())
     age = ((datetime.today() - id_num.date_of_birth) // timedelta(days=365.25))
     if age >= 18:
@@ -59,6 +61,7 @@ def sub():
         years_left = 18 - age
         messagebox.showinfo("Error", "Return in" + '\n' + str(years_left) + "years time")
 
+    # checking if email is valid
     try:
         validate_email(email_ent.get())
 
